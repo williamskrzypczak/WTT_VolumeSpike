@@ -1,0 +1,66 @@
+//@version=5
+indicator("WTT_VolumeSpike v1.1", shorttitle="WTT_VolSpike v1.1", overlay=true)
+
+// ============================================================================
+// WaveRider Trading Technologies - Volume Spike Signals Indicator
+// Version: 1.1
+// Revision: R1.1
+// 
+// Description: Generates long and short signals based on unusual spikes in volume
+// 
+// Revision History:
+// R1.1 - Updated alert messages and indicator name to use WTT_VolumeSpike prefix
+// R1.0 - Initial release with volume spike detection and signal generation
+// ============================================================================
+
+// Input Parameters
+volumeLength = input.int(20, "Volume Lookback Period", minval=5, maxval=100, group="Volume Settings")
+volumeThreshold = input.float(1.7, "Volume Spike Threshold", minval=1.5, maxval=5.0, step=0.1, group="Volume Settings")
+priceChangeThreshold = input.float(0.5, "Price Change Threshold (%)", minval=0.1, maxval=2.0, step=0.1, group="Price Settings")
+useATR = input.bool(true, "Use ATR for Price Filter", group="Price Settings")
+atrLength = input.int(14, "ATR Length", minval=5, maxval=50, group="Price Settings")
+atrMultiplier = input.float(1.0, "ATR Multiplier", minval=0.5, maxval=3.0, step=0.1, group="Price Settings")
+
+// Signal Display Settings
+showSignals = input.bool(true, "Show Signal Arrows", group="Display")
+showVolumeBars = input.bool(false, "Show Volume Bars", group="Display")
+
+// Alert Settings
+enableAlerts = input.bool(true, "Enable Alerts", group="Alerts")
+longAlertMessage = input.string("WTT_VolumeSpike Long Signal", "Long Alert Message", group="Alerts")
+shortAlertMessage = input.string("WTT_VolumeSpike Short Signal", "Short Alert Message", group="Alerts")
+
+// Calculations
+// Volume analysis
+volumeMA = ta.sma(volume, volumeLength)
+volumeRatio = volume / volumeMA
+isVolumeSpike = volumeRatio > volumeThreshold
+
+// Price analysis
+priceChange = ((close - close[1]) / close[1]) * 100
+atr = ta.atr(atrLength)
+priceThreshold = useATR ? atr * atrMultiplier : priceChangeThreshold
+
+// Signal generation logic
+longCondition = isVolumeSpike and priceChange > priceThreshold and close > open
+shortCondition = isVolumeSpike and priceChange < -priceThreshold and close < open
+
+// Plotting
+plotshape(showSignals and longCondition, title="Long Signal", location=location.belowbar, color=color.new(color.green, 0), style=shape.triangleup, size=size.tiny)
+plotshape(showSignals and shortCondition, title="Short Signal", location=location.abovebar, color=color.new(color.red, 0), style=shape.triangledown, size=size.tiny)
+
+// Volume bars (optional)
+longVolumeSpike = isVolumeSpike and priceChange > 0
+shortVolumeSpike = isVolumeSpike and priceChange < 0
+barcolor(showVolumeBars and longVolumeSpike ? color.new(color.green, 0) : showVolumeBars and shortVolumeSpike ? color.new(color.red, 0) : na, title="Volume Spike")
+
+// Alerts
+if enableAlerts and longCondition
+    alert(longAlertMessage + " - Price: " + str.tostring(close) + " Volume Ratio: " + str.tostring(volumeRatio, "#.##"), alert.freq_once_per_bar)
+
+if enableAlerts and shortCondition
+    alert(shortAlertMessage + " - Price: " + str.tostring(close) + " Volume Ratio: " + str.tostring(volumeRatio, "#.##"), alert.freq_once_per_bar)
+
+// Plot volume ratio for reference
+plot(volumeRatio, "Volume Ratio", color=color.gray, display=display.none)
+plot(volumeThreshold, "Threshold", color=color.red, display=display.none)

@@ -1,0 +1,56 @@
+//@version=5
+indicator("Indicator Template", shorttitle="Template", overlay=true)
+
+// ============================================================================
+// WaveRider Trading Technologies - Indicator Template
+// Version: 1.0
+// Revision: R1.0
+// 
+// Description: Template for creating new Pine Script indicators
+// 
+// Revision History:
+// R1.0 - Initial template creation
+// ============================================================================
+
+// Input Parameters
+// Group parameters logically and use descriptive names
+param1 = input.int(14, "Parameter 1", minval=1, maxval=100, group="Main Settings")
+param2 = input.float(1.0, "Parameter 2", minval=0.1, maxval=10.0, step=0.1, group="Main Settings")
+param3 = input.bool(true, "Enable Feature", group="Features")
+
+// Display Settings
+showSignals = input.bool(true, "Show Signals", group="Display")
+signalColor = input.color(color.orange, "Long Signal Color", group="Display")
+shortColor = input.color(color.purple, "Short Signal Color", group="Display")
+
+// Alert Settings
+enableAlerts = input.bool(true, "Enable Alerts", group="Alerts")
+longAlertMessage = input.string("Long Signal", "Long Alert Message", group="Alerts")
+shortAlertMessage = input.string("Short Signal", "Short Alert Message", group="Alerts")
+
+// Calculations
+// Add your indicator calculations here
+// Example:
+// ma = ta.sma(close, param1)
+// signal = close > ma
+
+// Signal generation logic
+longCondition = false  // Replace with your long condition
+shortCondition = false // Replace with your short condition
+
+// Plotting
+if showSignals and longCondition
+    label.new(bar_index, low, "L", color=signalColor, style=label.style_label_up, textcolor=color.white, size=size.small)
+
+if showSignals and shortCondition
+    label.new(bar_index, high, "S", color=shortColor, style=label.style_label_down, textcolor=color.white, size=size.small)
+
+// Alerts
+if enableAlerts and longCondition
+    alert(longAlertMessage + " - Price: " + str.tostring(close), alert.freq_once_per_bar)
+
+if enableAlerts and shortCondition
+    alert(shortAlertMessage + " - Price: " + str.tostring(close), alert.freq_once_per_bar)
+
+// Optional: Plot indicator values
+// plot(ma, "Moving Average", color=color.blue)
