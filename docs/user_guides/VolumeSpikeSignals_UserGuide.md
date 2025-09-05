@@ -9,14 +9,14 @@ Volume spikes often indicate increased market interest and can precede significa
 ## Initial Setup
 
 ### Installation
-1. Copy the `VolumeSpikeSignals_v1.0.pine` file to your TradingView Pine Script editor
+1. Copy the `VolumeSpikeSignals_v1.1.pine` file to your TradingView Pine Script editor
 2. Click "Add to Chart" to apply the indicator
 3. The indicator will appear as an overlay on your price chart
 
 ### Default Settings
 The indicator comes with conservative default settings optimized for most market conditions:
 - **Volume Lookback Period**: 20 bars
-- **Volume Spike Threshold**: 2.0x average volume
+- **Volume Spike Threshold**: 1.2x average volume
 - **Price Change Threshold**: 0.5%
 - **ATR Length**: 14 periods
 - **ATR Multiplier**: 1.0
@@ -39,7 +39,7 @@ The indicator works by:
 
 #### Volume Analysis
 - **Volume Ratio**: Current volume divided by the average volume over the lookback period
-- **Volume Spike**: Occurs when volume ratio exceeds the threshold (default: 2.0x)
+- **Volume Spike**: Occurs when volume ratio exceeds the threshold (default: 1.2x)
 - **Lookback Period**: Number of bars used to calculate average volume (default: 20)
 
 #### Price Analysis
@@ -85,9 +85,9 @@ Common scenarios that may produce false signals:
 ### Parameter Optimization
 
 #### Volume Settings
-- **Conservative**: Volume Threshold 2.0-2.5x (fewer, higher quality signals)
-- **Moderate**: Volume Threshold 1.8-2.0x (balanced signal frequency)
-- **Aggressive**: Volume Threshold 1.5-1.8x (more signals, higher false positive risk)
+- **Conservative**: Volume Threshold 1.5-2.0x (fewer, higher quality signals)
+- **Moderate**: Volume Threshold 1.2-1.5x (balanced signal frequency)
+- **Aggressive**: Volume Threshold 1.0-1.2x (more signals, higher false positive risk)
 
 #### Price Settings
 - **Use ATR Filter**: Recommended for volatile markets
@@ -122,7 +122,7 @@ Common scenarios that may produce false signals:
 - Timeframe too high
 
 **Solutions**:
-- Reduce volume threshold to 1.8-2.0
+- Reduce volume threshold to 1.0-1.2
 - Check lower timeframes
 - Verify market has sufficient volume
 
@@ -133,7 +133,7 @@ Common scenarios that may produce false signals:
 - Market too volatile
 
 **Solutions**:
-- Increase volume threshold to 2.5-3.0
+- Increase volume threshold to 1.5-2.0
 - Increase price change threshold
 - Use ATR filter with higher multiplier
 
@@ -169,7 +169,7 @@ Common scenarios that may produce false signals:
 **A**: The indicator works on all timeframes, but 15-minute to 4-hour charts typically provide the best balance of signal frequency and reliability.
 
 ### Q: How do I know if a volume spike is significant?
-**A**: Look for volume ratios above 2.0x the average, and ensure the spike accompanies meaningful price movement in the expected direction.
+**A**: Look for volume ratios above 1.2x the average, and ensure the spike accompanies meaningful price movement in the expected direction.
 
 ### Q: Should I use the ATR filter or fixed price threshold?
 **A**: Use ATR filter in volatile markets and fixed threshold in stable markets. ATR adapts to market conditions automatically.

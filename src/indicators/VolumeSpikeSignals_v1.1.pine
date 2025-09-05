@@ -15,7 +15,7 @@ indicator("WTT_VolumeSpike v1.1", shorttitle="WTT_VolSpike v1.1", overlay=true)
 
 // Input Parameters
 volumeLength = input.int(20, "Volume Lookback Period", minval=5, maxval=100, group="Volume Settings")
-volumeThreshold = input.float(1.7, "Volume Spike Threshold", minval=1.5, maxval=5.0, step=0.1, group="Volume Settings")
+volumeThreshold = input.float(1.2, "Volume Spike Threshold", minval=1.0, maxval=5.0, step=0.1, group="Volume Settings")
 priceChangeThreshold = input.float(0.5, "Price Change Threshold (%)", minval=0.1, maxval=2.0, step=0.1, group="Price Settings")
 useATR = input.bool(true, "Use ATR for Price Filter", group="Price Settings")
 atrLength = input.int(14, "ATR Length", minval=5, maxval=50, group="Price Settings")
