@@ -1,14 +1,15 @@
 //@version=5
-indicator("WTT_VolumeSpike v1.1", shorttitle="WTT_VolSpike v1.1", overlay=true)
+indicator("WTT_VolumeSpike v1.2", shorttitle="WTT_VolSpike v1.2", overlay=true)
 
 // ============================================================================
 // WaveRider Trading Technologies - Volume Spike Signals Indicator
-// Version: 1.1
-// Revision: R1.1
+// Version: 1.2
+// Revision: R1.2
 // 
 // Description: Generates long and short signals based on unusual spikes in volume
 // 
 // Revision History:
+// R1.2 - Updated volume spike threshold from 1.7x to 1.2x for more sensitive signal detection
 // R1.1 - Updated alert messages and indicator name to use WTT_VolumeSpike prefix
 // R1.0 - Initial release with volume spike detection and signal generation
 // ============================================================================

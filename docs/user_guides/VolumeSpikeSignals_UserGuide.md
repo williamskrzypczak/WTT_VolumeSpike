@@ -9,7 +9,7 @@ Volume spikes often indicate increased market interest and can precede significa
 ## Initial Setup
 
 ### Installation
-1. Copy the `VolumeSpikeSignals_v1.1.pine` file to your TradingView Pine Script editor
+1. Copy the `VolumeSpikeSignals_v1.2.pine` file to your TradingView Pine Script editor
 2. Click "Add to Chart" to apply the indicator
 3. The indicator will appear as an overlay on your price chart
 

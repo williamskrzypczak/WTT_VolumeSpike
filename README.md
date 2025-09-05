@@ -8,7 +8,7 @@ Welcome to the WaveRider Trading Technologies repository. This project contains 
 WTT_Vlm/
 ├── src/                    # Source code directory
 │   └── indicators/         # Pine Script indicators
-│       └── VolumeSpikeSignals_v1.1.pine
+│       └── VolumeSpikeSignals_v1.2.pine
 ├── docs/                   # Documentation
 │   └── user_guides/        # User guides for indicators
 │       └── VolumeSpikeSignals_UserGuide.md
@@ -20,8 +20,8 @@ WTT_Vlm/
 
 ## Current Indicators
 
-### Volume Spike Signals (v1.1)
-- **File**: `src/indicators/VolumeSpikeSignals_v1.1.pine`
+### Volume Spike Signals (v1.2)
+- **File**: `src/indicators/VolumeSpikeSignals_v1.2.pine`
 - **Description**: Generates long and short signals based on unusual spikes in volume
 - **Features**:
   - Volume spike detection with customizable thresholds
